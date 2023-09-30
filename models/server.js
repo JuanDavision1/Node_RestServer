@@ -11,7 +11,7 @@ export class Server {
  
     constructor(){
         this.app = express();
-        this.port= process.env.PORT;
+        this.port= process.env.PORT || 3000;
         this.usuariosRoutePath ='/api/usuarios';
             //midddlewares
             //añaden otra funcionalidad a mi webserver funcion que se ejecuta cuando deslplegemos el servidor
