@@ -6,6 +6,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from '../routes/user.js';
+import { dbConnection } from '../database/config.js';
 dotenv.config();
 export class Server {
  
@@ -13,12 +14,19 @@ export class Server {
         this.app = express();
         this.port= process.env.PORT;
         this.usuariosRoutePath ='/api/usuarios';
+ //conectar a base de daros
+ this.conectarBD();
+
             //midddlewares
             //añaden otra funcionalidad a mi webserver funcion que se ejecuta cuando deslplegemos el servidor
         this.middlewares()
             //Rutas
         this.routes();
     }
+   
+async conectarBD(){
+    await dbConnection();
+}
  middlewares(){
     this.app.use(cors());
     //midlleware para recibir cuando se hace un post del frontend
